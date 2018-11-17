@@ -1,20 +1,34 @@
 package com.example.kudri.theauaraiy;
 
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class DetailsActivity extends AppCompatActivity {
+
+    private static final String TAG = DetailsActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +74,67 @@ public class DetailsActivity extends AppCompatActivity {
         String date = ft.format(System.currentTimeMillis());
         nameTv.setText(CitiesService.getRuName(country, w.getName()) + " " + w.getTemp() + getString(R.string.label_temp_item) + ", " + date);
 
-        Button toMap = findViewById(R.id.to_map);
-        toMap.setOnClickListener(new View.OnClickListener() {
+        String id = String.valueOf(w.getId());
+        System.out.println("###id: " + id);
+        String appid = "07ed2f9abc0a3eaccd0a9aff406b4532";
+        String url = "https://api.openweathermap.org/data/2.5/forecast?id=" + id + "&units=metric&appid=" + appid;
+
+        final RecyclerView recyclerView = findViewById(R.id.rec_view);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(manager);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DetailsActivity.this, MapsActivity.class);
-                intent.putExtra("lon", w.getLon());
-                intent.putExtra("lat", w.getLat());
-                intent.putExtra("name", w.getName());
-                startActivity(intent);
+            public void onResponse(JSONObject response) {
+                List<Weather> wList = getDataForIntervals(response);
+                TimesListAdapter adapter = new TimesListAdapter(DetailsActivity.this, wList);
+                recyclerView.setAdapter(adapter);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "onErrorResponse: " + error.getMessage());
             }
         });
+        queue.add(request);
     }
+
+    private List<Weather> getDataForIntervals(JSONObject response) {
+        try {
+            JSONArray list = response.getJSONArray("list");
+            List<Weather> wList = new ArrayList<>();
+            for (int i = 0; i < list.length(); i++) {
+                JSONObject object = list.getJSONObject(i);
+
+                //weather
+                JSONArray weather = object.getJSONArray("weather");
+                JSONObject wObject = weather.getJSONObject(0);
+                String weatherMain = wObject.getString("main");
+                String weatherDesc = wObject.getString("description");
+                String icon = wObject.getString("icon");
+
+                //main
+                JSONObject main = object.getJSONObject("main");
+                int temp = main.getInt("temp");
+                int humidity = main.getInt("humidity");
+
+                //wind
+                JSONObject wind = object.getJSONObject("wind");
+                int windSpeed = wind.getInt("speed");
+
+                long date = object.getLong("dt");
+                String dateTxt = object.getString("dt_txt");
+
+                Weather w = new Weather(weatherMain, weatherDesc, icon, temp, humidity, windSpeed, date, dateTxt);
+                wList.add(w);
+            }
+            return wList;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

@@ -21,11 +21,12 @@ public class Weather implements Serializable {
     private int windDeg;
 
     private long date;
-    private int id;
+    private String dateTxt;
+    private long id;
     private String name;
     private String icon;
 
-    public Weather(double lon, double lat, String weatherMain, String weatherDesc, int temp, int humidity, int windSpeed, int windDeg, long date, int id, String name, String icon) {
+    public Weather(double lon, double lat, String weatherMain, String weatherDesc, int temp, int humidity, int windSpeed, int windDeg, long date, long id, String name, String icon) {
         this.lon = lon;
         this.lat = lat;
         this.weatherMain = weatherMain;
@@ -38,6 +39,17 @@ public class Weather implements Serializable {
         this.id = id;
         this.name = name;
         this.icon = icon;
+    }
+
+    public Weather(String weatherMain, String weatherDesc, String icon, int temp, int humidity, int windSpeed, long date, String dateTxt) {
+        this.weatherMain = weatherMain;
+        this.weatherDesc = weatherDesc;
+        this.icon = icon;
+        this.temp = temp;
+        this.humidity = humidity;
+        this.windSpeed = windSpeed;
+        this.date = date;
+        this.dateTxt = dateTxt;
     }
 
     public double getLon() {
@@ -112,11 +124,11 @@ public class Weather implements Serializable {
         this.date = date;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -135,4 +147,13 @@ public class Weather implements Serializable {
     public void setIcon(String icon) {
         this.icon = icon;
     }
+
+    public String getDateTxt() {
+        return dateTxt;
+    }
+
+    public void setDateTxt(String dateTxt) {
+        this.dateTxt = dateTxt;
+    }
+
 }

@@ -119,7 +119,7 @@ public class CityFragment extends Fragment implements Listener {
 
                 //the rest
                 long date = 0;
-                int id = object.getInt("id");
+                long id = object.getLong("id");
                 String name = object.getString("name");
 
                 Weather w = new Weather(lon, lat, weatherMain, weatherDesc, temp, humidity, windSpeed, windDeg, date, id, name, icon);

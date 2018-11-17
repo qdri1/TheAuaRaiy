@@ -28,12 +28,19 @@ public class ListAdapter extends RecyclerView.Adapter<VH> {
     private Context context;
     private int country;
     private String iconUrl = "http://openweathermap.org/img/w/";
+    private TextToSpeech tToS;
 
     public ListAdapter(Context context, List<Weather> wList, Listener listener, int country) {
         this.context = context;
         this.wList = wList;
         this.listener = listener;
         this.country = country;
+        tToS = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+
+            }
+        });
     }
 
     @Override
@@ -96,19 +103,13 @@ public class ListAdapter extends RecyclerView.Adapter<VH> {
             }
         });
 
-        final TextToSpeech t1 = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-
-            }
-        });
 
         final String finalWeather = weather;
         holder.playNameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String prepareText = "Сегодня в городе " + CitiesService.getRuName(country, wList.get(position).getName()) + " погода " + finalWeather + ". " + context.getString(R.string.label_humidity) + ": " + wList.get(position).getHumidity() + context.getString(R.string.label_humidity_item) + ". " + context.getString(R.string.label_speed_wind) + ": " + wList.get(position).getWindSpeed() + " метр в секунду";
-                t1.speak(prepareText, TextToSpeech.QUEUE_FLUSH, null);
+                tToS.speak(prepareText, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 
