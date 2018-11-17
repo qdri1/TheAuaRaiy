@@ -127,8 +127,18 @@ public class DetailsActivity extends AppCompatActivity {
                 long date = object.getLong("dt");
                 String dateTxt = object.getString("dt_txt");
 
-                Weather w = new Weather(weatherMain, weatherDesc, icon, temp, humidity, windSpeed, date, dateTxt);
-                wList.add(w);
+                if (i == 0) {
+                    String dateTitleTxt = dateTxt;
+                    dateTitleTxt = dateTitleTxt.substring(0, 11);
+                    wList.add(new Weather(dateTitleTxt, true));
+                } else if (dateTxt.contains("00:00:00")) {
+                    String dateTitleTxt = dateTxt;
+                    dateTitleTxt = dateTitleTxt.substring(0, 11);
+                    wList.add(new Weather(dateTitleTxt, true));
+                }
+                dateTxt = dateTxt.substring(11);
+
+                wList.add(new Weather(weatherMain, weatherDesc, icon, temp, humidity, windSpeed, date, dateTxt, false));
             }
             return wList;
         } catch (JSONException e) {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -38,12 +39,25 @@ public class TimesListAdapter extends RecyclerView.Adapter<VH2> {
         TextView dateView = holder.dateView;
         TextView tempTV = holder.tempTV;
 
-        dateView.setText(wList.get(position).getDateTxt());
-        tempTV.setText(String.valueOf(wList.get(position).getTemp()) + context.getString(R.string.label_temp_item));
+        if (wList.get(position).isTitle()) {
+            dateView.setText(wList.get(position).getDateTxt());
+            tempTV.setText("");
 
-        Glide.with(context)
-                .load(iconUrl + wList.get(position).getIcon() + ".png")
-                .into(holder.iconView);
+            Glide.with(context)
+                    .load(R.drawable.index_background_circle)
+                    .into(holder.iconView);
+
+            holder.backgroundLayout.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+        } else {
+            dateView.setText(wList.get(position).getDateTxt());
+            tempTV.setText(String.valueOf(wList.get(position).getTemp()) + context.getString(R.string.label_temp_item));
+
+            Glide.with(context)
+                    .load(iconUrl + wList.get(position).getIcon() + ".png")
+                    .into(holder.iconView);
+
+            holder.backgroundLayout.setBackgroundColor(context.getResources().getColor(R.color.color_white));
+        }
     }
 
     @Override
@@ -55,11 +69,13 @@ public class TimesListAdapter extends RecyclerView.Adapter<VH2> {
 class VH2 extends RecyclerView.ViewHolder {
     TextView dateView, tempTV;
     ImageView iconView;
+    LinearLayout backgroundLayout;
 
     VH2(View itemView) {
         super(itemView);
         dateView = itemView.findViewById(R.id.date_tv);
         tempTV = itemView.findViewById(R.id.temperature_tv);
         iconView = itemView.findViewById(R.id.icon_view);
+        backgroundLayout = itemView.findViewById(R.id.background_layout);
     }
 }

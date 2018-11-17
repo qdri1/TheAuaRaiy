@@ -25,6 +25,7 @@ public class Weather implements Serializable {
     private long id;
     private String name;
     private String icon;
+    private boolean isTitle;
 
     public Weather(double lon, double lat, String weatherMain, String weatherDesc, int temp, int humidity, int windSpeed, int windDeg, long date, long id, String name, String icon) {
         this.lon = lon;
@@ -41,7 +42,7 @@ public class Weather implements Serializable {
         this.icon = icon;
     }
 
-    public Weather(String weatherMain, String weatherDesc, String icon, int temp, int humidity, int windSpeed, long date, String dateTxt) {
+    public Weather(String weatherMain, String weatherDesc, String icon, int temp, int humidity, int windSpeed, long date, String dateTxt, boolean isTitle) {
         this.weatherMain = weatherMain;
         this.weatherDesc = weatherDesc;
         this.icon = icon;
@@ -50,6 +51,12 @@ public class Weather implements Serializable {
         this.windSpeed = windSpeed;
         this.date = date;
         this.dateTxt = dateTxt;
+        this.isTitle = isTitle;
+    }
+
+    public Weather(String dateTxt, boolean isTitle) {
+        this.dateTxt = dateTxt;
+        this.isTitle = isTitle;
     }
 
     public double getLon() {
@@ -156,4 +163,11 @@ public class Weather implements Serializable {
         this.dateTxt = dateTxt;
     }
 
+    public boolean isTitle() {
+        return isTitle;
+    }
+
+    public void setTitle(boolean title) {
+        isTitle = title;
+    }
 }
