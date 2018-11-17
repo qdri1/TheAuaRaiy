@@ -1,0 +1,89 @@
+<resources>
+    <string name="app_name">TheAuaRaiy</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="label_temp_item">°C</string>
+    <string name="label_speed_item">м/с</string>
+    <string name="label_humidity_item">%</string>
+
+    <string name="label_weather_main">Погода</string>
+    <string name="label_humidity">Влажность</string>
+    <string name="label_speed_wind">Скорость ветра</string>
+
+    <string name="label_clounds_en">Clouds</string>
+    <string name="label_clear_en">Clear</string>
+    <string name="label_rain_en">Rain</string>
+    <string name="label_mist_en">Mist</string>
+    <string name="label_snow_en">Snow</string>
+
+    <string name="label_clounds_ru">Облачно</string>
+    <string name="label_clear_ru">Ясно</string>
+    <string name="label_rain_ru">Дождь</string>
+    <string name="label_mist_ru">Туман</string>
+    <string name="label_snow_ru">Снег</string>
+
+    <string-array name="array_weather_en">
+        <item>@string/label_clounds_en</item>
+        <item>@string/label_clear_en</item>
+        <item>@string/label_rain_en</item>
+        <item>@string/label_mist_en</item>
+        <item>@string/label_snow_en</item>
+    </string-array>
+
+    <string-array name="array_weather_ru">
+        <item>@string/label_clounds_ru</item>
+        <item>@string/label_clear_ru</item>
+        <item>@string/label_rain_ru</item>
+        <item>@string/label_mist_ru</item>
+        <item>@string/label_snow_ru</item>
+    </string-array>
+
+    <array name="array_images_kz">
+        <item>@drawable/almaty</item>
+        <item>@drawable/astana</item>
+        <item>@drawable/atyrau</item>
+        <item>@drawable/kokshetau</item>
+        <item>@drawable/petropavlovsk</item>
+        <item>@drawable/pavlodar</item>
+        <item>@drawable/qyzylorda</item>
+        <item>@drawable/qapshaghay</item>
+        <item>@drawable/semey</item>
+        <item>@drawable/temirtau</item>
+        <item>@drawable/taraz</item>
+        <item>@drawable/turkestan</item>
+        <item>@drawable/qostanay</item>
+        <item>@drawable/aqtobe</item>
+        <item>@drawable/taldyqorghan</item>
+        <item>@drawable/shymkent</item>
+        <item>@drawable/aktau</item>
+        <item>@drawable/oral</item>
+    </array>
+
+    <array name="array_images_ru">
+        <item>@drawable/moscow</item>
+        <item>@drawable/sochi</item>
+        <item>@drawable/kiev</item>
+        <item>@drawable/yekaterinburg</item>
+        <item>@drawable/samara</item>
+    </array>
+
+    <array name="array_images_oth">
+        <item>@drawable/tashkent</item>
+        <item>@drawable/samarqand</item>
+    </array>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="nav_header_text">THE AUA RAIY</string>
+
+    <string name="settings_title">Настройки</string>
+
+    <string name="nav_title_country_1">Казахстан</string>
+    <string name="nav_title_country_2">Россия</string>
+    <string name="nav_title_country_3">Узбекистан</string>
+    <string name="send_to">Поделиться</string>
+
+
+</resources>

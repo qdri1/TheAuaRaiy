@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_country_1"
+            android:icon="@drawable/ic_flag_black_24dp"
+            android:title="@string/nav_title_country_1" />
+        <item
+            android:id="@+id/nav_country_2"
+            android:icon="@drawable/ic_flag_black_24dp"
+            android:title="@string/nav_title_country_2" />
+        <item
+            android:id="@+id/nav_country_3"
+            android:icon="@drawable/ic_flag_black_24dp"
+            android:title="@string/nav_title_country_3" />
+    </group>
+
+    <item android:title="Разработчики">
+        <menu>
+            <item
+                android:icon="@drawable/ic_person_black_24dp"
+                android:title="Айтахан" />
+
+            <item
+                android:icon="@drawable/ic_person_black_24dp"
+                android:title="Кудри" />
+        </menu>
+    </item>
+
+</menu>
