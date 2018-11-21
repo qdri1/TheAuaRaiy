@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().findItem(R.id.nav_country_1).setChecked(true);
+        navigationView.getMenu().findItem(R.id.kazakh).setChecked(true);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frame_layout, CityFragment.newInstance(0));
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_country_1) {
+        if (id == R.id.kazakh) {
             // Handle the camera action
 
             toolbar.setTitle(getString(R.string.nav_title_country_1));
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft.replace(R.id.frame_layout, CityFragment.newInstance(0));
             ft.commit();
 
-        } else if (id == R.id.nav_country_2) {
+        } else if (id == R.id.russia) {
 
             toolbar.setTitle(getString(R.string.nav_title_country_2));
 
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft.replace(R.id.frame_layout, CityFragment.newInstance(1));
             ft.commit();
 
-        } else if (id == R.id.nav_country_3) {
+        } else if (id == R.id.uzbek) {
 
             toolbar.setTitle(getString(R.string.nav_title_country_3));
 

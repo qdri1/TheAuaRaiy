@@ -61,11 +61,14 @@ public class CityFragment extends Fragment implements Listener {
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
 
+        // Запрос тастап, ответ алатын жер
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                // Келген ответти листка сактап алатын жер
                 List<Weather> wList = getDataAsList(response);
+                // Каланын списогын корсететин жер, болису, аудио.
                 ListAdapter adapter = new ListAdapter(getContext(), wList, CityFragment.this, country);
                 recyclerView.setAdapter(adapter);
             }
@@ -80,6 +83,7 @@ public class CityFragment extends Fragment implements Listener {
         return v;
     }
 
+    // каланы басканда тандайтын жер
     @Override
     public void onItemClick(View view, Weather weather) {
         Intent intent = new Intent(getActivity(), DetailsActivity.class);

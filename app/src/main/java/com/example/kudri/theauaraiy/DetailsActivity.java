@@ -84,11 +84,13 @@ public class DetailsActivity extends AppCompatActivity {
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
 
+        // запрос тастап ответ алатын жер
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 List<Weather> wList = getDataForIntervals(response);
+                // список времени погоды
                 TimesListAdapter adapter = new TimesListAdapter(DetailsActivity.this, wList);
                 recyclerView.setAdapter(adapter);
             }

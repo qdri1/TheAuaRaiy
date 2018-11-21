@@ -49,6 +49,7 @@ public class ListAdapter extends RecyclerView.Adapter<VH> {
         return new VH(v);
     }
 
+    // Сендерге керек жер, ар тизимди корсететин жер, болису мен аудио.
     @Override
     public void onBindViewHolder(final VH holder, final int position) {
         TextView cityNameTV = holder.cityNameTV;
@@ -68,9 +69,10 @@ public class ListAdapter extends RecyclerView.Adapter<VH> {
         }
 
         Glide.with(context)
-                .load(testArrayIcon.getResourceId(CitiesService.getEnNames(country).indexOf(wList.get(position).getName()), 0))
+                .load(testArrayIcon.getResourceId(CitiesService.getEnNames(country).indexOf(wList.get(position).getName()), 0)) // каланын суретин агылшынша аты аркылы издеп коятын жер
                 .into(holder.backgroundImg);
 
+        // Иконканы ссылкадан загрузить етип корсететин жер.
         Glide.with(context)
                 .load(iconUrl + wList.get(position).getIcon() + ".png")
                 .into(holder.iconView);
@@ -82,6 +84,7 @@ public class ListAdapter extends RecyclerView.Adapter<VH> {
             ex.printStackTrace();
         }
 
+        // погода аныктамасы, Погода, Влажность, Скорость ветра.
         detailsTV.setText(context.getString(R.string.label_weather_main) + ": " + weather + ", " + context.getString(R.string.label_humidity) + ": " + wList.get(position).getHumidity() + context.getString(R.string.label_humidity_item) + "\n" + context.getString(R.string.label_speed_wind) + ": " + wList.get(position).getWindSpeed() + context.getString(R.string.label_speed_item));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +94,7 @@ public class ListAdapter extends RecyclerView.Adapter<VH> {
             }
         });
 
+        // болису
         holder.shareNameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,12 +107,16 @@ public class ListAdapter extends RecyclerView.Adapter<VH> {
             }
         });
 
-
+        // аудио
         final String finalWeather = weather;
         holder.playNameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String prepareText = "Сегодня в городе " + CitiesService.getRuName(country, wList.get(position).getName()) + " погода " + finalWeather + ". " + context.getString(R.string.label_humidity) + ": " + wList.get(position).getHumidity() + context.getString(R.string.label_humidity_item) + ". " + context.getString(R.string.label_speed_wind) + ": " + wList.get(position).getWindSpeed() + " метр в секунду";
+                String prepareText = "Сегодня в городе " + CitiesService.getRuName(country, wList.get(position).getName()) + " погода " +
+                        String.valueOf(wList.get(position).getTemp()) + context.getString(R.string.label_temp_item) + ", " +
+                        finalWeather + ". " + context.getString(R.string.label_humidity) + ": " + wList.get(position).getHumidity() +
+                        context.getString(R.string.label_humidity_item) + ". " + context.getString(R.string.label_speed_wind) + ": " +
+                        wList.get(position).getWindSpeed() + " метр в секунду.";
                 tToS.speak(prepareText, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
